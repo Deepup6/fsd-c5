@@ -3,12 +3,12 @@ require("./db")
 
 var app=express();
 var port=3000;
-var empmodel=require("./model/employee")
+var stdmodel=require("./model/student")
 app.use(express.json())
 
 app.post('/',(req,res)=>{
     try{
-        empmodel(req.body).save();
+        stdmodel(req.body).save();
         res.send("date added to db")
     }catch(err){
         res.send(err)
@@ -19,7 +19,7 @@ app.post('/',(req,res)=>{
 
 app.get('/',async(req,res)=>{
     try{
-        var data = await empmodel.find();
+        var data = await stdmodel.find();
         res.send(data)
     } catch(err){
         res.send(err)
@@ -37,7 +37,7 @@ app.delete('/:id', async(req,res)=>{
 
 app.put('/:id', async(req,res)=>{
     try {
-        await empmodel.findByIdAndUpdate(req.params.id,req.body);
+        await stdmodel.findByIdAndUpdate(req.params.id,req.body);
         res.send("edited")
     } catch (err) {
         res.send(err)
